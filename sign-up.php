@@ -20,14 +20,16 @@ $password = hash('sha512', $_POST["password"]);
 
 if(!isValidEmail($email)) {
     exitWithMessage("Please enter a valid email.");
-}elseif (!isValidName($firstname)) {
-    exitWithMessage("Please enter a valid first name (Names cannot contain numbers and must be between 2 and 30 characters).");
-}elseif (!isValidName($lastname)) {
-    exitWithMessage("Please enter a valid last name (Names cannot contain numbers and must be between 2 and 30 characters).");
+}elseif (!isValidFirstName($firstname)) {
+    exitWithMessage("Please enter a valid first name. (Names must be between 2 and 30 characters and can only contain letters. Whitespace and hyphens are allowed for compound names.)");
+}elseif (!isValidLastName($lastname)) {
+    exitWithMessage("Please enter a valid last name (Names must be between 2 and 30 characters and can only contain letters. Whitespace and hyphens are allowed for compound names., endings such as Jr and II are allowed.)");
 }elseif (!isValidAddress($address)) {
     exitWithMessage("Please enter a valid address (Can only contain letters, numbers, whitespace, hyphens, and pound signs.)");
 }elseif (!isValidZip($zip)) { // Zip contains only numbers and 5 digits
     exitWithMessage("Please enter a valid 5 digit zip code.");
+}elseif (!isValidPassword($_POST["password"])) {
+    exitWithMessage("Please enter a valid password that only contains letters, numbers and underscores, and is between 4 and 15 characters.");
 }
 
 // Database
@@ -72,7 +74,17 @@ exit();
 // Helper functions
 function isValidName($name){ //Name contains no numbers
     return preg_match('/^[a-zA-Z\-\s]+$/', $name)
-        && strlen($name) >= 2 && strlen($name) <= 20;
+        && strlen($name) >= 2 && strlen($name) <= 15;
+}
+
+function isValidFirstName($name){ //Name contains only letters, compound names are allowed with a hypen or space
+    return preg_match('/^[a-zA-Z]+((\s|\-)[a-zA-Z]+)?$/', $name)
+        && strlen($name) >= 2 && strlen($name) <= 15;
+}
+
+function isValidLastName($name){ //Name contains only letters, compound names are allowed with a hypen or space
+    return preg_match('/^[a-zA-Z]+((((\-)|(\s))[a-zA-Z]+)?(,(\s)?(((j|J)|(s|S))(r|R)(\.)?|II|III|IV))?)?$/', $name)
+        && strlen($name) >= 2 && strlen($name) <= 15;
 }
 
 function isValidAddress($address) {
@@ -87,6 +99,11 @@ function isValidEmail($email) { //Email has @ and some website, plus some other 
 function isValidZip($zip) {
     return preg_match('/^\d{5}$/', $zip);
 }
+
+function isValidPassword($pass) {
+    return preg_match('/^[a-zA-Z]\w{3,14}$/', $pass);
+}
+
 function exitWithMessage($message) { //Shows popup with message, then goes back to original page
     echo "<script type=\"text/javascript\">alert(\"$message\");history.go(-1);</script>";
     exit();
