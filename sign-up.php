@@ -6,7 +6,7 @@ Your email address is: <?php echo $_POST["email"]; ?>
 
 -->
 <?php
-
+//header("Location: ./index.html");
 // Get inputs and validate
 $firstname = $_POST["firstname"];
 $lastname = $_POST["lastname"];
@@ -34,7 +34,7 @@ if(!isValidEmail($email)) {
 $servername = "localhost:3306"; //local machine, the port on which the mySQL server runs on
 $username = "root"; //default is root
 $serverpassword = ""; //default is none
-$databasename = "testUsers";
+$databasename = "siteUsers";
 
 $conn = new mysqli($servername, $username, $serverpassword, $databasename); //creates the connection
 
@@ -43,7 +43,7 @@ if ($conn->connect_error) {
 }  //checks the connection
 
 //Check if new email or already exists in database
-$sqlSelect = "SELECT `email` FROM `userAll2` WHERE `email` = '$email'";
+$sqlSelect = "SELECT `email` FROM `currentCustomers` WHERE `email` = '$email'";
 $resultSelect = mysqli_query($conn, $sqlSelect);
 
 if($resultSelect) {
@@ -54,7 +54,7 @@ if($resultSelect) {
     echo "Error: " . $sqlSelect . "<br>" . mysqli_error($conn);
 }
 
-$sql = "INSERT INTO `userAll2`(`firstname`, `lastname`, `email`, `address`, `state`, `zip`, `password`) VALUES ('$firstname','$lastname','$email','$address','$state','$zip','$password')"; //Queries must be in string format
+$sql = "INSERT INTO `currentCustomers`(`firstname`, `lastname`, `email`, `address`, `state`, `zip`, `password`) VALUES ('$firstname','$lastname','$email','$address','$state','$zip','$password')"; //Queries must be in string format
 $result = mysqli_query($conn, $sql); //does your query
 
 if ($result) { //checks your query
@@ -65,6 +65,11 @@ if ($result) { //checks your query
 
 mysqli_close($conn);
 
+$exitMessage = "Your account has been created, check your email for verification. Thank you!";
+echo "<script type=\"text/javascript\">alert(\"$exitMessage\");window.location.href = './index.html';</script>"; //Redirect browser back to homepage
+exit();
+
+// Helper functions
 function isValidName($name){ //Name contains no numbers
     return preg_match('/^[a-zA-Z\-\s]+$/', $name)
         && strlen($name) >= 2 && strlen($name) <= 20;
