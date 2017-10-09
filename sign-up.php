@@ -28,6 +28,8 @@ if(!isValidEmail($email)) {
     exitWithMessage("Please enter a valid address (Can only contain letters, numbers, whitespace, hyphens, and pound signs.)");
 }elseif (!isValidZip($zip)) { // Zip contains only numbers and 5 digits
     exitWithMessage("Please enter a valid 5 digit zip code.");
+}elseif (!isValidPassword($_POST["password"])) {
+    exitWithMessage("Please enter a valid password that only contains letters, numbers and underscores, and is between 4 and 15 characters.");
 }
 
 // Database
@@ -97,6 +99,11 @@ function isValidEmail($email) { //Email has @ and some website, plus some other 
 function isValidZip($zip) {
     return preg_match('/^\d{5}$/', $zip);
 }
+
+function isValidPassword($pass) {
+    return preg_match('/^[a-zA-Z]\w{3,14}$/', $pass);
+}
+
 function exitWithMessage($message) { //Shows popup with message, then goes back to original page
     echo "<script type=\"text/javascript\">alert(\"$message\");history.go(-1);</script>";
     exit();
