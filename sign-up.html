@@ -65,23 +65,39 @@
 					<div class="row">
 						<div class="12u" align="center">
 							<section>
-								<form method="post" action="#">
+								<form method="post" action="sign-up.php">
 									<div class="row 50%">
 										<div class="12u">
 											<div class="6u 12u(mobile)">
-													<input name="firstname" placeholder="First Name" type="text" />
+													<input name="firstname" placeholder="First Name" type="text" required/>
 											</div>
 											<br>
 											<div class="6u 12u(mobile)">
-												<input name="lastname" placeholder="Last Name" type="text" />
+													<input name="lastname" placeholder="Last Name" type="text" required/>
 											</div>
 											<br>
 											<div class="6u 12u(mobile)">
-													<input name="email" placeholder="Email" type="email" />
+													<input name="email" placeholder="Email" type="email" required/>
 											</div>
 											<br>
 											<div class="6u 12u(mobile)">
-													<input name="password" placeholder="Password" type="password" />
+													<input name="address" placeholder="Address" type="text" required/>
+											</div>
+											<br>
+											<div class="6u 12u(mobile)">
+													<input name="state" placeholder="State" type="text" required/>
+											</div>
+											<br>
+											<div class="6u 12u(mobile)">
+													<input name="zip" placeholder="Zip Code" type="text" required/>
+											</div>
+											<br>
+											<div class="6u 12u(mobile)">
+													<input name="password" placeholder="Password" type="password" required/>
+											</div>
+											<br>
+											<div class="6u 12u(mobile)">
+													<input name="zip" placeholder="5 Digit Zip Code" type="text" required/>
 											</div>
 
 										</div>
@@ -95,7 +111,8 @@
 									</div>-->
 									<div class="row">
 										<div class="12u">
-											<a href="#" class="form-button-submit button">Submit</a>
+											<!--<a href="#" class="form-button-submit button">Submit</a>-->
+											<input type="submit">
 										</div>
 									</div>
 								</form>
