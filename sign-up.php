@@ -11,16 +11,21 @@ Your email address is: <?php echo $_POST["email"]; ?>
 $firstname = $_POST["firstname"];
 $lastname = $_POST["lastname"];
 $email = $_POST["email"];
-$password = hash('sha512', $_POST["password"]);
+$address = $_POST["address"];
+$state = $_POST["state"];
 $zip = $_POST["zip"];
+$password = hash('sha512', $_POST["password"]);
+
 
 
 if(!isValidEmail($email)) {
     exitWithMessage("Please enter a valid email.");
-}elseif (isValidName($firstname)) {
+}elseif (!isValidName($firstname)) {
     exitWithMessage("Please enter a valid first name (Names cannot contain numbers).");
-}elseif (isValidName($lastname)) {
+}elseif (!isValidName($lastname)) {
     exitWithMessage("Please enter a valid last name (Names cannot contain numbers).");
+}elseif (!isValidAddress($address)) {
+    exitWithMessage("Please enter a valid address (Can only contain letters, numbers, whitespace, hyphens, and pound signs.");
 }elseif (!preg_match('/^\d{5}$/', $zip)) { // Zip contains only numbers and 5 digits
     exitWithMessage("Please enter a valid 5 digit zip code.");
 }
@@ -39,7 +44,7 @@ if ($conn->connect_error) {
 
 
 
-$sql = "INSERT INTO `userAll`(`firstname`, `lastname`, `email`, `zipcode`, `passwordhash`) VALUES ('$firstname', '$lastname', '$email', '$zip', '$password')"; //Queries must be in string format
+$sql = "INSERT INTO `userAll2`(`firstname`, `lastname`, `email`, `address`, `state`, `zip`, `password`) VALUES ('$firstname','$lastname','$email','$address','$state','$zip','$password')"; //Queries must be in string format
 $result = mysqli_query($conn, $sql); //does your query
 
 if ($result) { //checks your query
@@ -51,7 +56,11 @@ if ($result) { //checks your query
 mysqli_close($conn);
 
 function isValidName($name){ //Name contains no numbers
-    return preg_match('/\\d/', $String) <= 0;
+    return preg_match('/^[a-zA-Z]+$/', $name);
+}
+
+function isValidAddress($address) {
+    return preg_match('/^[a-zA-Z0-9\s.#\-]+$/', $address);
 }
 
 function isValidEmail($email) { //Email has @ and some website, plus some other stuff I think
