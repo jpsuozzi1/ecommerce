@@ -21,12 +21,12 @@ $password = hash('sha512', $_POST["password"]);
 if(!isValidEmail($email)) {
     exitWithMessage("Please enter a valid email.");
 }elseif (!isValidName($firstname)) {
-    exitWithMessage("Please enter a valid first name (Names cannot contain numbers).");
+    exitWithMessage("Please enter a valid first name (Names cannot contain numbers and must be between 2 and 30 characters).");
 }elseif (!isValidName($lastname)) {
-    exitWithMessage("Please enter a valid last name (Names cannot contain numbers).");
+    exitWithMessage("Please enter a valid last name (Names cannot contain numbers and must be between 2 and 30 characters).");
 }elseif (!isValidAddress($address)) {
-    exitWithMessage("Please enter a valid address (Can only contain letters, numbers, whitespace, hyphens, and pound signs.");
-}elseif (!preg_match('/^\d{5}$/', $zip)) { // Zip contains only numbers and 5 digits
+    exitWithMessage("Please enter a valid address (Can only contain letters, numbers, whitespace, hyphens, and pound signs.)");
+}elseif (!isValidZip($zip)) { // Zip contains only numbers and 5 digits
     exitWithMessage("Please enter a valid 5 digit zip code.");
 }
 
@@ -42,7 +42,17 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }  //checks the connection
 
+//Check if new email or already exists in database
+$sqlSelect = "SELECT `email` FROM `userAll2` WHERE `email` = '$email'";
+$resultSelect = mysqli_query($conn, $sqlSelect);
 
+if($resultSelect) {
+    if(mysqli_num_rows($resultSelect)){ //Email already exists
+        exitWithMessage("Email already used, please enter a new email.");
+    }
+}else {
+    echo "Error: " . $sqlSelect . "<br>" . mysqli_error($conn);
+}
 
 $sql = "INSERT INTO `userAll2`(`firstname`, `lastname`, `email`, `address`, `state`, `zip`, `password`) VALUES ('$firstname','$lastname','$email','$address','$state','$zip','$password')"; //Queries must be in string format
 $result = mysqli_query($conn, $sql); //does your query
@@ -56,7 +66,8 @@ if ($result) { //checks your query
 mysqli_close($conn);
 
 function isValidName($name){ //Name contains no numbers
-    return preg_match('/^[a-zA-Z]+$/', $name);
+    return preg_match('/^[a-zA-Z\-\s]+$/', $name)
+        && strlen($name) >= 2 && strlen($name) <= 20;
 }
 
 function isValidAddress($address) {
@@ -68,6 +79,9 @@ function isValidEmail($email) { //Email has @ and some website, plus some other 
         && preg_match('/@.+\./', $email);
 }
 
+function isValidZip($zip) {
+    return preg_match('/^\d{5}$/', $zip);
+}
 function exitWithMessage($message) { //Shows popup with message, then goes back to original page
     echo "<script type=\"text/javascript\">alert(\"$message\");history.go(-1);</script>";
     exit();
