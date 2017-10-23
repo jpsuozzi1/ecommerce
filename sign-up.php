@@ -6,6 +6,12 @@ Your email address is: <?php echo $_POST["email"]; ?>
 
 -->
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/Exception.php';
+require 'PHPMailer-master/src/SMTP.php';
 //header("Location: ./index.html");
 // Get inputs and validate
 $firstname = $_POST["firstname"];
@@ -69,6 +75,24 @@ mysqli_close($conn);
 
 $exitMessage = "Your account has been created, check your email for verification. Thank you!";
 echo "<script type=\"text/javascript\">alert(\"$exitMessage\");window.location.href = './index.html';</script>"; //Redirect browser back to homepage
+$mail = new PHPMailer;
+$mail->isSMTP();
+$mail->SMTPDebug = 2;
+$mail->Host = 'smtp.gmail.com';
+$mail->Port = 587;
+$mail->SMTPSecure = 'tls';
+$mail->SMTPAuth = true;
+$mail->Username = 'avoemporium@gmail.com';
+$mail->Password = 'Avocado4753!';
+
+$mail->From = 'no-reply@avoemporium.com';
+$mail->FromName = 'Avocado Emporium';
+$mail->addAddress($email, $firstname);
+$mail->isHTML(false);
+$mail->Subject = 'Thanks for signing up!';
+$message = 'Hi ' . $firstname . ', welcome to the Avocado Emporium! We\'re so glad to you have as a part of our avocado community. Check out our site to start a subscription!';
+$mail->Body = $message;
+$mail->send();
 exit();
 
 // Helper functions
