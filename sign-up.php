@@ -7,6 +7,8 @@ Your email address is: <?php echo $_POST["email"]; ?>
 -->
 <?php
 
+session_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 
 require 'PHPMailer-master/src/PHPMailer.php';
@@ -67,14 +69,17 @@ $result = mysqli_query($conn, $sql); //does your query
 
 if ($result) { //checks your query
     echo "New record created successfully";
+    $_SESSION['user'] = $email;
+    $_SESSION['firstname'] = $firstname;
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
+
 mysqli_close($conn);
 
 $exitMessage = "Your account has been created, check your email for verification. Thank you!";
-echo "<script type=\"text/javascript\">alert(\"$exitMessage\");window.location.href = './index.html';</script>"; //Redirect browser back to homepage
+echo "<script type=\"text/javascript\">alert(\"$exitMessage\");window.location.href = 'member-home.php';</script>"; //Redirect browser back to homepage
 $mail = new PHPMailer;
 $mail->isSMTP();
 $mail->SMTPDebug = 2;
