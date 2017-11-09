@@ -27,9 +27,12 @@ if($resultSelectUser) {
         $row = mysqli_fetch_assoc($resultSelectUser);
     	if ($row['password'] == $password) { 
                 $firstname = $row['firstname'];
-    			$_SESSION['user'] = $email;
+                $lastname = $row['lastname'];
+    			$_SESSION['email'] = $email;
                 $_SESSION['firstname'] = $firstname;
-                $name = $_SESSION['firstname'];
+                $_SESSION['lastname'] = $lastname;
+                $_SESSION['password'] = $_POST['password'];
+                echo "Your account has been successfully updated!";
     			header("location: member-home.php");
     	} else {
     		exitWithMessage("The password you entered is incorrect.");

@@ -69,8 +69,10 @@ $result = mysqli_query($conn, $sql); //does your query
 
 if ($result) { //checks your query
     echo "New record created successfully";
-    $_SESSION['user'] = $email;
+    $_SESSION['email'] = $email;
     $_SESSION['firstname'] = $firstname;
+    $_SESSION['lastname'] = $lastname;
+    $_SESSION['password'] = $_POST["password"];
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }

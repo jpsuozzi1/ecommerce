@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!$_SESSION['user']) {
+if (!$_SESSION['email']) {
 	$message = "Please login to view this page.";
 	echo "<script type='text/javascript'>alert('$message');
 	window.location.href='login.html';
@@ -38,7 +38,7 @@ if (!$_SESSION['user']) {
 
 						<!-- Logo -->
 							<h1 id="logo"><a href="index.html">Avocado Emporium</a></h1>
-							<p>Welcome, <?php echo $_SESSION['firstname'] ?>! Look below to see our subscriptions.</p>
+							<p>Welcome, <?php echo $_SESSION['firstname'] ?>! Look below to see our subscription packages.</p>
 
 						<!-- Nav -->
 							<nav id="nav">
@@ -61,9 +61,9 @@ if (!$_SESSION['user']) {
 											<li><a href="#">Veroeros feugiat</a></li>
 										</ul>
 									</li> -->
-									<li><a class="icon fa-gear" href="settings.html"><span>My Account</span></a></li>
+									<li><a class="icon fa-gear" href="my-account.php"><span>My Account</span></a></li>
 									<li><a class="icon fa-sign-out" href="logout.php"><span>Logout</span></a></li>
-									<li><a class="icon fa-phone" href="contact-us.html"><span>Contact Us</span></a></li>
+									<li><a class="icon fa-phone" href="member-contact-us.php"><span>Contact Us</span></a></li>
 								</ul>
 							</nav>
 
@@ -90,9 +90,9 @@ if (!$_SESSION['user']) {
 									<form action="https://test.bitpay.com/checkout" method="post" >
 										<input type="hidden" name="action" value="checkout" />
 										<input type="hidden" name="posData" value="" />
-										<input type="hidden" name="data" value="eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2isEnYKUq1EEiXuTuphg5zVe4Y/pAAhf6HC8jEzanwn/PjrMCI69DPa+fKe5EkDkt9Nogde5yf7X+eU0aGuOnjc1DABODfAk6RhR2dFx6icdoWay4vO7xSLLp08rquOdZ4kallztylW15jxFaml3l57zg==" />
+										<input type="hidden" name="data" value="eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2isWyFCFpkKw5RaWO8wNcZMQt4jeEylXKcdKSvPTV6w6Ib8Gm5HjvPCF3MkZYh2POh1mLSXuAJ8qgc9v9oUu3nMqw==" />
 										<input type="image" src="https://test.bitpay.com/img/button-large.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins." >
-									  </form>
+									</form>
 									<p id="tenDollarBTC">Loading BTC Exchange rate...</p>
 									
 							</div>
@@ -104,14 +104,14 @@ if (!$_SESSION['user']) {
 										<header>
 											<h3>Variety ($18/month)</h3>
 										</header>
-										<p>If one avo a week isn't enough for you, the variety pack is a great option. With this subscription we send you two avocados a week, a total of </p>
+										<p>If one avo a week isn't enough for you, the variety pack is a great option. We'll send you two avocados a week. That's eight avocados a month!</p>
 									</section>
 									<form action="https://test.bitpay.com/checkout" method="post" >
 										<input type="hidden" name="action" value="checkout" />
 										<input type="hidden" name="posData" value="" />
-										<input type="hidden" name="data" value="eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2isI3/vHnryE9Or1wUZQd2gQ2j4vtIBuqRzvwuxGq0KLsi5fLg5EsizeyF/NWvb3QtKkRquMt2m7SuHVFmlHkYXoA1YN5/RarqhOznPSIDB3zethSrJ0i0K8AgEYnRe5RtXMyde2jlBBiWQgyBoPFpfUw==" />
+										<input type="hidden" name="data" value="eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2ismADek9ALTUcPh6im2R2KYM/LB9Ej0vak7zAFjb2EcFHKUYhVtK+36uvVUEVI0UQZhgvsNaZ8LXz9zohzehHSPQ==" />
 										<input type="image" src="https://test.bitpay.com/img/button-large.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins." >
-									  </form>
+									</form>
 									<p id="eighteenDollarBTC">Loading BTC Exchange rate...</p>
 									<h3 id="btcRate">Loading BTC Exchange rate...</h3>
 
@@ -124,14 +124,14 @@ if (!$_SESSION['user']) {
 										<header>
 											<h3>All the Avos ($20/month)</h3>
 										</header>
-										<p>You don't have to be Ina Garten to cook with avocados! Each avocado delivery includes a variety of recipes using seasonal ingredients that you can find at any farmer's market or grocery store.</p>
+										<p>With the "All the Avos" subscription, you'll never run out of your favorite fruit. With this package you get three avocados per week, totaling twelve a month!</p>
 									</section>
 									<form action="https://test.bitpay.com/checkout" method="post" >
 										<input type="hidden" name="action" value="checkout" />
 										<input type="hidden" name="posData" value="" />
-										<input type="hidden" name="data" value="eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2isxEtLe6c9ZEoaDcD/D08C0oXxi9zLZ/9Ceku5Q0tPKPaPR9BHkNXuerw9lAPCjeAwUm17Jd/oa7KB45QPIAeU86Jnk7T82qPHi+kFTonujn1/+do47XpKAr+g3jPnmj+OANt6Ty3NZ3BA9yKEI9m0mg==" />
+										<input type="hidden" name="data" value="eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2isq3JI4XNELVFD2YdlJLuwmj982hM2NwYfLk2YnELHVjPFF+Q44qGI90i0BJ/lzBlrOLOjWIqh7Y/Oqmc1HegGvA==" />
 										<input type="image" src="https://test.bitpay.com/img/button-large.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins." >
-									  </form>
+									</form>
 									<p id="twentyFiveDollarBTC">Loading BTC Exchange rate...</p>
 									
 							</div>
