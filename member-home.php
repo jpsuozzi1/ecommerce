@@ -34,7 +34,20 @@ if (!$_SESSION['email']) {
 				if (code == 'NEWMEMBER40') {
 					var bitpayButton = document.getElementById('promo');
 					bitpayButton.setAttribute('value', "eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2isHU1BTWMB7F0Fw3omn4X4PFT8VHgmueFfO7I9bysb0bqlHZhS4c8wv2K3QrEzk3LOMTR2cwNLw+E/88AZr80m2Q==");
-					alert("Promo code '" + code + "' applied")
+
+					var header = document.getElementById('twentyFiveHeader');
+					header.innerHTML = '40% Off All the Avos ($15/month)';
+					header.setAttribute('style', 'color:green');
+
+					var fifteen = document.getElementById('fifteenDollarBTC');
+					fifteen.style.visibility = 'visible';
+
+					var twentyFive = document.getElementById('twentyFiveDollarBTC');
+					twentyFive.style.visibility = 'hidden';
+					
+					//price.setAttribute('id', 'fifteenDollarBTC');
+
+					alert("Promo code '" + code + "' applied");
 				} else {
 					alert("Promo code '" + code + "' is not valid");
 				}
@@ -136,7 +149,7 @@ if (!$_SESSION['email']) {
 									<section>
 										<a class="image featured"><img src="images/avocado6.png" alt="" /></a>
 										<header>
-											<h3>All the Avos ($25/month)</h3>
+											<h3 id="twentyFiveHeader">All the Avos ($25/month)</h3>
 										</header>
 										<p>With the "All the Avos" subscription, you'll never run out of your favorite fruit. With this package you get three avocados per week, totaling twelve a month!</p>
 										<h6>Enter promo code:</h6>
@@ -151,6 +164,7 @@ if (!$_SESSION['email']) {
 										<input id="promo" type="hidden" name="data" value="eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2isq3JI4XNELVFD2YdlJLuwmj982hM2NwYfLk2YnELHVjPFF+Q44qGI90i0BJ/lzBlrOLOjWIqh7Y/Oqmc1HegGvA==" />
 										<input type="image" src="https://test.bitpay.com/img/button-large.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins." >
 									</form>
+									<p id="fifteenDollarBTC" style="visibility:hidden">Loading BTC Exchange rate...</p>
 									<p id="twentyFiveDollarBTC">Loading BTC Exchange rate...</p>
 									
 							</div>

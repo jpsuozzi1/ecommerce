@@ -27,6 +27,7 @@ function myFunction(arr) {
     var btcInUSD = arr["rate"]
     var stringPrice = "(1 btc = $" + btcInUSD.toFixed(2) + ")";
     //document.getElementById("bitcoinPrice").innerHTML = stringPrice;
+    document.getElementById("fifteenDollarBTC").innerHTML = createBTCPriceString(btcInUSD, 15);
     document.getElementById("twentyFiveDollarBTC").innerHTML = createBTCPriceString(btcInUSD, 25);
     document.getElementById("tenDollarBTC").innerHTML = createBTCPriceString(btcInUSD, 10);
     document.getElementById("eighteenDollarBTC").innerHTML = createBTCPriceString(btcInUSD, 18);
