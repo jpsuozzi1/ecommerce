@@ -2,6 +2,13 @@
 
 session_start();
 
+if (!$_SESSION['email']) {
+	$message = "Please login to view this page.";
+	echo "<script type='text/javascript'>alert('$message');
+	window.location.href='login.html';
+	</script>";
+}
+
 ?>
 
 <!DOCTYPE HTML>
@@ -28,7 +35,7 @@ session_start();
 					<div id="header" class="container">
 
 						<!-- Logo -->
-							<h1 id="logo"><a href="index.html">Avocado Emporium</a></h1>
+							<h1 id="logo"><a href="member-home.php">Avocado Emporium</a></h1>
 
 						<!-- Nav -->
 							<nav id="nav">
@@ -88,7 +95,7 @@ session_start();
 													<h6 style="text-align:left; color:white">Enter new password or leave blank</h6>
 													<input name="password" type="password"/>
 												<br>
-													<p style="text-align:center; color:black">***If you would like to update your address, please call the number listed on our contact page to ensure subscriptions are transferred correctly***</p>
+													<h3 style="text-align:center; color:black">***If you would like to update your address, please call the number listed on our contact page to ensure subscriptions are transferred correctly***</h3>
 											</div>
 										</div>
 									</div>

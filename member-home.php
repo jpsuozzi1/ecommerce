@@ -28,6 +28,19 @@ if (!$_SESSION['email']) {
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 
+
+		<script type="text/javascript">
+			function applyCode(code) {
+				if (code == 'NEWMEMBER40') {
+					var bitpayButton = document.getElementById('promo');
+					bitpayButton.setAttribute('value', "eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2isHU1BTWMB7F0Fw3omn4X4PFT8VHgmueFfO7I9bysb0bqlHZhS4c8wv2K3QrEzk3LOMTR2cwNLw+E/88AZr80m2Q==");
+					alert("Promo code '" + code + "' applied")
+				} else {
+					alert("Promo code '" + code + "' is not valid");
+				}
+			}
+		</script>
+
 	</head>
 	<body class="homepage">
 		<div id="page-wrapper">
@@ -37,8 +50,8 @@ if (!$_SESSION['email']) {
 					<div id="header" class="container">
 
 						<!-- Logo -->
-							<h1 id="logo"><a href="index.html">Avocado Emporium</a></h1>
-							<p>Welcome, <?php echo $_SESSION['firstname'] ?>! Look below to see our subscription packages.</p>
+							<h1 id="logo"><a href="member-home.php">Avocado Emporium</a></h1>
+							<p>Welcome, <?php echo $_SESSION['firstname'] ?>! Look below to see our subscription packages</p>
 
 						<!-- Nav -->
 							<nav id="nav">
@@ -61,6 +74,7 @@ if (!$_SESSION['email']) {
 											<li><a href="#">Veroeros feugiat</a></li>
 										</ul>
 									</li> -->
+									<!-- <li><button onclick="updateHTML()">click here</button> -->
 									<li><a class="icon fa-gear" href="my-account.php"><span>My Account</span></a></li>
 									<li><a class="icon fa-sign-out" href="logout.php"><span>Logout</span></a></li>
 									<li><a class="icon fa-phone" href="member-contact-us.php"><span>Contact Us</span></a></li>
@@ -81,7 +95,7 @@ if (!$_SESSION['email']) {
 
 								<!-- Feature -->
 									<section>
-										<a class="image featured"><img src="images/avocado2.png" alt="" /></a>
+										<a class="image featured"><img src="images/avocado8.png" alt="" /></a>
 										<header>
 											<h3>Starter ($10/month)</h3>
 										</header>
@@ -100,7 +114,7 @@ if (!$_SESSION['email']) {
 
 								<!-- Feature -->
 									<section>
-										<a class="image featured"><img src="images/avocado1.png" alt="" /></a>
+										<a class="image featured"><img src="images/avocado7.png" alt="" /></a>
 										<header>
 											<h3>Variety ($18/month)</h3>
 										</header>
@@ -120,16 +134,21 @@ if (!$_SESSION['email']) {
 
 								<!-- Feature -->
 									<section>
-										<a class="image featured"><img src="images/avocado3.png" alt="" /></a>
+										<a class="image featured"><img src="images/avocado6.png" alt="" /></a>
 										<header>
-											<h3>All the Avos ($20/month)</h3>
+											<h3>All the Avos ($25/month)</h3>
 										</header>
 										<p>With the "All the Avos" subscription, you'll never run out of your favorite fruit. With this package you get three avocados per week, totaling twelve a month!</p>
+										<h6>Enter promo code:</h6>
+										<input id="code" style="width:175px; height:40px; border-radius:4px" type="text"/>
+										<br>
+										<button onclick="applyCode(document.getElementById('code').value)">APPLY</button>
+
 									</section>
 									<form action="https://test.bitpay.com/checkout" method="post" >
 										<input type="hidden" name="action" value="checkout" />
 										<input type="hidden" name="posData" value="" />
-										<input type="hidden" name="data" value="eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2isq3JI4XNELVFD2YdlJLuwmj982hM2NwYfLk2YnELHVjPFF+Q44qGI90i0BJ/lzBlrOLOjWIqh7Y/Oqmc1HegGvA==" />
+										<input id="promo" type="hidden" name="data" value="eKH0j0sYXbTiSddl+h3PMxh2yaYuj0Aj7i8XzT9bYLYwcT9/U7jebphc9ZM/C2isq3JI4XNELVFD2YdlJLuwmj982hM2NwYfLk2YnELHVjPFF+Q44qGI90i0BJ/lzBlrOLOjWIqh7Y/Oqmc1HegGvA==" />
 										<input type="image" src="https://test.bitpay.com/img/button-large.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins." >
 									</form>
 									<p id="twentyFiveDollarBTC">Loading BTC Exchange rate...</p>
